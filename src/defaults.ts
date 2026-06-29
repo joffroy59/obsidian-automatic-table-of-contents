@@ -3,7 +3,7 @@
  */
 export interface TableOfContentsOptions {
   title: string
-  style: 'nestedList' | 'nestedOrderedList' | 'inlineFirstLevel'
+  style: 'nestedList' | 'nestedOrderedList' | 'nestedListTask' | 'nestedOrderedListTask' | 'inlineFirstLevel'
   minLevel: number
   maxLevel: number
   include: RegExp | null

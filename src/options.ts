@@ -20,8 +20,8 @@ const availableOptions: AvailableOptions = {
   style: {
     type: 'value',
     default: DEFAULT_OPTIONS.style,
-    values: ['nestedList', 'nestedOrderedList', 'inlineFirstLevel'],
-    comment: 'TOC style (nestedList|nestedOrderedList|inlineFirstLevel)',
+    values: ['nestedList', 'nestedOrderedList', 'nestedListTask', 'nestedOrderedListTask', 'inlineFirstLevel'],
+    comment: 'TOC style (nestedList|nestedOrderedList|nestedListTask|nestedOrderedListTask|inlineFirstLevel)',
   },
   minLevel: {
     type: 'number',
@@ -65,7 +65,7 @@ const availableOptions: AvailableOptions = {
  */
 export interface PluginSettings {
   defaultTitle: string
-  defaultStyle: 'nestedList' | 'nestedOrderedList' | 'inlineFirstLevel'
+  defaultStyle: 'nestedList' | 'nestedOrderedList' | 'nestedListTask' | 'nestedOrderedListTask' | 'inlineFirstLevel'
   defaultMinLevel: number
   defaultMaxLevel: number
   defaultIncludeLinks: boolean
