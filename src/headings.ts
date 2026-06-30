@@ -15,6 +15,8 @@ export function getMarkdownFromHeadings(
   const markdownHandlersByStyle = {
     nestedList: getMarkdownNestedListFromHeadings,
     nestedOrderedList: getMarkdownNestedOrderedListFromHeadings,
+    nestedTaskList: getMarkdownNestedListTaskFromHeadings,
+    nestedOrderedListTask: getMarkdownNestedOrderedListTaskFromHeadings,
     inlineFirstLevel: getMarkdownInlineFirstLevelFromHeadings,
   }
   let titleMarkdown = ''
@@ -36,22 +38,38 @@ function getMarkdownNestedListFromHeadings(
   headings: HeadingCache[],
   options: TableOfContentsOptions,
 ): string | null {
-  return getMarkdownListFromHeadings(headings, false, options)
+  return getMarkdownListFromHeadings(headings, false, false, options)
 }
 
 function getMarkdownNestedOrderedListFromHeadings(
   headings: HeadingCache[],
   options: TableOfContentsOptions,
 ): string | null {
-  return getMarkdownListFromHeadings(headings, true, options)
+  return getMarkdownListFromHeadings(headings, true, false, options)
+}
+
+function getMarkdownNestedListTaskFromHeadings(
+  headings: HeadingCache[],
+  options: TableOfContentsOptions,
+): string | null {
+  return getMarkdownListFromHeadings(headings, false, true, options)
+}
+
+function getMarkdownNestedOrderedListTaskFromHeadings(
+  headings: HeadingCache[],
+  options: TableOfContentsOptions,
+): string | null {
+  return getMarkdownListFromHeadings(headings, true, true, options)
 }
 
 function getMarkdownListFromHeadings(
   headings: HeadingCache[],
   isOrdered: boolean,
+  isTask: boolean,
   options: TableOfContentsOptions,
 ): string | null {
-  const prefix = isOrdered ? '1.' : '-'
+  var prefix = isOrdered ? '1.' : '-'
+  prefix += isTask ? ' [ ]' : ''
   const lines: string[] = []
   const minLevel =
     options.minLevel > 0 ? options.minLevel : Math.min(...headings.map((heading) => heading.level))
